@@ -7,6 +7,11 @@
  *
  * @author amaan
  */
+
+
+import java.awt.HeadlessException;
+import java.sql.*;
+import javax.swing.JOptionPane;
 public class LoginPage extends javax.swing.JFrame {
 
     /**
@@ -14,6 +19,7 @@ public class LoginPage extends javax.swing.JFrame {
      */
     public LoginPage() {
         initComponents();
+        jButton1.addActionListener(this::jButton1ActionPerformed);
     }
 
     /**
@@ -102,38 +108,45 @@ public class LoginPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_userActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt){
+        String url = "jdbc:mysql://localhost:3306/mydb";
+        String mysqlUser = "root";
+        String mysqlPassword = "root123";
+        String pswrd = new String(password.getPassword());
+        String username = user.getText();
+        String query = ("select password from admin where USER_ID = '" + username + "';");
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+            Connection conn = DriverManager.getConnection(url, mysqlUser, mysqlPassword);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            if (rs.next()){
+                String realpswrd = rs.getString("PASSWORD");
+                
+                if (realpswrd.equals(pswrd)){
+                    Dashboard dsh = new Dashboard();
+                    dsh.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Wrong username or password");
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Wrong username");
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
         }
-        //</editor-fold>
+        catch(HeadlessException | SQLException e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        
+    }
+    
+    public static void main(String args[]) {
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginPage().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new LoginPage().setVisible(true);
         });
     }
 
