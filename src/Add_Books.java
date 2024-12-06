@@ -44,6 +44,8 @@ public class Add_Books extends javax.swing.JFrame {
         cancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setForeground(java.awt.Color.gray);
+        setResizable(false);
 
         b1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         b1.setText("BOOK ID");
@@ -52,7 +54,7 @@ public class Add_Books extends javax.swing.JFrame {
         b2.setText("CATEGORY");
 
         b3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        b3.setText("NAME");
+        b3.setText("BOOK NAME");
         b3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b3ActionPerformed(evt);

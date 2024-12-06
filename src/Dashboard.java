@@ -35,6 +35,7 @@ public class Dashboard extends javax.swing.JFrame {
         b7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("DASHBOARD");
@@ -82,6 +83,11 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         b7.setText("EDIT ADMIN");
+        b7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,19 +157,34 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void b6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b6ActionPerformed
         // TODO add your handling code here:
+        Remove_Staff rs = new Remove_Staff();
+        rs.setVisible(true);
     }//GEN-LAST:event_b6ActionPerformed
 
     private void b3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b3ActionPerformed
         // TODO add your handling code here:
+        Remove_Books rb = new Remove_Books();
+        rb.setVisible(true);
     }//GEN-LAST:event_b3ActionPerformed
 
     private void b4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b4ActionPerformed
         // TODO add your handling code here:
+        Staff_Details sd = new Staff_Details();
+        sd.setVisible(true);
     }//GEN-LAST:event_b4ActionPerformed
 
     private void b5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b5ActionPerformed
         // TODO add your handling code here:
+        Add_Staff as = new Add_Staff();
+        as.setVisible(true);
     }//GEN-LAST:event_b5ActionPerformed
+
+    private void b7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b7ActionPerformed
+        // TODO add your handling code here:
+        Edit_Admin ea = new Edit_Admin();
+        ea.setVisible(true);
+        
+    }//GEN-LAST:event_b7ActionPerformed
 
     /**
      * @param args the command line arguments
